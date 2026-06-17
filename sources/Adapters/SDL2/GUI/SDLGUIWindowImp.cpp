@@ -103,8 +103,13 @@ SDLGUIWindowImp::SDLGUIWindowImp(GUICreateWindowParams &p)
   
   screenRect_._topLeft._x=0;
   screenRect_._topLeft._y=0;
-  screenRect_._bottomRight._x=windowed_?appWidth*mult_:screenWidth;
-  screenRect_._bottomRight._y=windowed_?appHeight*mult_:screenHeight;
+  if (fullscreen) {
+    screenRect_._bottomRight._x=screenWidth;
+    screenRect_._bottomRight._y=screenHeight;
+  } else {
+    screenRect_._bottomRight._x=windowed_?appWidth*mult_:screenWidth;
+    screenRect_._bottomRight._y=windowed_?appHeight*mult_:screenHeight;
+  }
 
   Trace::Log("DISPLAY","Creating SDL Window (%d,%d)",screenRect_.Width(), screenRect_.Height());
     window_ = SDL_CreateWindow("LittleGPTracker",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,
