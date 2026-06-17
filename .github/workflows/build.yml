@@ -137,12 +137,11 @@ jobs:
         env:
           GITHUB_REF: ${{ github.ref }}
 
-      - name: Upload build release
-        uses: softprops/action-gh-release@v2.4.2
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag_name: ${{ steps.extract_tag.outputs.tag_name }}
-          files: ./projects/*.zip
+          name: lgpt-rg35xxplus
+          path: ./projects/*.zip
 
   build-x64:
     runs-on: ubuntu-latest
